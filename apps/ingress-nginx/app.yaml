@@ -16,6 +16,8 @@ spec:
     server: https://kubernetes.default.svc
     namespace: ingress-nginx
   syncPolicy:
-      createNamespace: true
-      selfHeal: true
+    automated:
       prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
