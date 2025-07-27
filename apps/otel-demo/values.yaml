@@ -1,50 +1,31 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: otel-demo-ingress
-  namespace: otel
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-spec:
-  ingressClassName: nginx
+ingress:
+  enabled: true
+  host: demo.local
   tls:
-    - hosts:
-        - demo.local
-      secretName: otel-demo-tls
-  rules:
-    - host: demo.local
-      http:
-        paths:
-          - path: /frontend(/|$)(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: frontend
-                port:
-                  number: 80
-          - path: /cart(/|$)(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: cartservice
-                port:
-                  number: 80
-          - path: /checkout(/|$)(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: checkoutservice
-                port:
-                  number: 80
-          - path: /product(/|$)(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: productcatalogservice
-                port:
-                  number: 80
-          # Add more paths similarly if you have services like:
-          # - currencyservice
-          # - paymentservice
-          # - shippingservice
+    enabled: true
+    secretName: otel-demo-tls
+  services:
+    - name: frontend
+      path: /frontend
+      port: 80
+    - name: cartservice
+      path: /cart
+      port: 80
+    - name: checkoutservice
+      path: /checkout
+      port: 80
+    - name: currencyservice
+      path: /currency
+      port: 80
+    - name: productcatalogservice
+      path: /product
+      port: 80
+    - name: recommendationservice
+      path: /recommendation
+      port: 80
+    - name: shippingservice
+      path: /shipping
+      port: 80
+    - name: adservice
+      path: /ads
+      port: 80
