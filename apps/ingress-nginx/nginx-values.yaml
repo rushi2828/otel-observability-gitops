@@ -4,8 +4,8 @@ controller:
     nodePorts:
       http: 30080
       https: 30443
+
   ingressClassResource:
-    enabled: true
     name: nginx
-  admissionWebhooks:
-    enabled: false
+    enabled: true
+    default: true
