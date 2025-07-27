@@ -111,12 +111,18 @@ kubectl port-forward svc/argocd-server -n "${ARGOCD_NAMESPACE}" 8090:443
 
 --------------------------------
 
-create ns argocd 
+kubectl create ns argocd 
 
 # only one time activity
 helm dependency build charts/argocd
 
 helm install argocd charts/argocd/ --namespace argocd
 
-kubectl -n argocd apply -f bootstrap/app-of-apps.yaml
+kubectl -n argocd apply -f apps/apps-root.yaml
 
+kubectl -n argocd apply -f apps/otel-demo/app.yaml
+
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
+
+
+kubectl -n argocd port-forward svc/argocd-server 8090:443
