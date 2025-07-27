@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
-    chart: opentelemetry-demo
-    targetRevision: 0.27.0
+    repoURL: https://github.com/rushi2828/otel-observability-gitops
+    targetRevision: main
+    path: apps/otel-demo
     helm:
       valueFiles:
         - values.yaml
@@ -19,6 +19,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-      allowEmpty: true
-    syncOptions:
-      - CreateNamespace=true
