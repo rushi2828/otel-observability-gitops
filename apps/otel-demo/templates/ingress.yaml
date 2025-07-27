@@ -1,16 +1,21 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: otel-demo
-  namespace: otel-demo
+  name: otel-frontend-ingress
+  namespace: otel
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - demo.local
+      secretName: otel-demo-tls
   rules:
-    - host: otel-demo.local
+    - host: demo.local
       http:
         paths:
-          - path: /
+          - path: /frontend
             pathType: Prefix
             backend:
               service:
