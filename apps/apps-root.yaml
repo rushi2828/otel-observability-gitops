@@ -8,13 +8,13 @@ spec:
   source:
     repoURL: https://github.com/rushi2828/otel-observability-gitops
     targetRevision: HEAD
-    path: apps
+    path: apps/ingress-nginx
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
   syncPolicy:
-  automated:
-    prune: true
-    selfHeal: true
-  syncOptions:
-    - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
