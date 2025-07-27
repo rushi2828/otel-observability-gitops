@@ -6,12 +6,22 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/rushi2828/otel-observability-gitops
-    targetRevision: HEAD
-    path: apps/ingress-nginx
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    chart: ingress-nginx
+    targetRevision: 4.10.1
     helm:
-      valueFiles:
-        - nginx-values.yaml
+      values: |
+        controller:
+          service:
+            type: NodePort
+            nodePorts:
+              http: 30080
+              https: 30443
+          ingressClassResource:
+            enabled: true
+            name: nginx
+          admissionWebhooks:
+            enabled: false
   destination:
     server: https://kubernetes.default.svc
     namespace: ingress-nginx
