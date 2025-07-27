@@ -7,8 +7,8 @@ spec:
   project: default
   source:
     repoURL: https://github.com/rushi2828/otel-observability-gitops
-    chart: apps/ingress-nginx
-    targetRevision: 4.10.1
+    targetRevision: HEAD
+    path: apps/ingress-nginx
     helm:
       valueFiles:
         - nginx-values.yaml
@@ -17,8 +17,7 @@ spec:
     namespace: ingress-nginx
   syncPolicy:
     automated:
-      prune: true
       selfHeal: true
-      allowEmpty: true
+      prune: true
     syncOptions:
       - CreateNamespace=true
