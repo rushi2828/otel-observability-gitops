@@ -8,10 +8,10 @@ spec:
   source:
     repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
     chart: opentelemetry-demo
-    targetRevision: latest
+    targetRevision: 0.27.0  # or latest stable tag from GitHub Releases
     helm:
       valueFiles:
-        - values.yaml
+        - values.yaml  # Make sure this file exists in your ArgoCD repo!
   destination:
     server: https://kubernetes.default.svc
     namespace: otel

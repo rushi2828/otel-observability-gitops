@@ -80,14 +80,7 @@ metadata:
 done
 
 # Install ArgoCD via Helm (skip CRDs in chart)
-if helm ls -n "${ARGOCD_NAMESPACE}" | grep -q "^${RELEASE_NAME}"; then
-    echo "✅ ArgoCD Helm release '${RELEASE_NAME}' already exists."
-else
-    echo "📥 Installing ArgoCD Helm chart..."
-    helm install "${RELEASE_NAME}" "${ARGOCD_HELM_CHART_PATH}" -n "${ARGOCD_NAMESPACE}" \
-        --skip-crds
-    echo "✅ ArgoCD installation complete."
-fi
+kubectl apply -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
 # Optional: Show admin password and port-forward
 echo "⏳ Waiting for all ArgoCD pods to be in 'Running' status..."
@@ -115,4 +108,15 @@ kubectl -n argocd apply -f bootstrap/app-of-apps.yaml
 echo "🌐 Port forwarding ArgoCD server to https://localhost:8090"
 kubectl port-forward svc/argocd-server -n "${ARGOCD_NAMESPACE}" 8090:443
 
+
+--------------------------------
+
+create ns argocd 
+
+# only one time activity
+helm dependency build charts/argocd
+
+helm install argocd charts/argocd/ --namespace argocd
+
+kubectl -n argocd apply -f bootstrap/app-of-apps.yaml
 
