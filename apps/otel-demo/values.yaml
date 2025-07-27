@@ -1,0 +1,45 @@
+frontend:
+  ingress:
+    enabled: true
+    className: nginx
+    hosts:
+      - host: otel-demo.local
+        paths:
+          - path: /frontend
+            pathType: Prefix
+    tls:
+      - hosts:
+          - otel-demo.local
+        secretName: otel-demo-tls
+
+cartservice:
+  ingress:
+    enabled: true
+    className: nginx
+    hosts:
+      - host: otel-demo.local
+        paths:
+          - path: /cart
+            pathType: Prefix
+
+checkoutservice:
+  ingress:
+    enabled: true
+    className: nginx
+    hosts:
+      - host: otel-demo.local
+        paths:
+          - path: /checkout
+            pathType: Prefix
+
+# … repeat similar blocks for currencyservice, paymentservice, etc.
+
+productcatalogservice:
+  ingress:
+    enabled: true
+    className: nginx
+    hosts:
+      - host: otel-demo.local
+        paths:
+          - path: /product
+            pathType: Prefix
