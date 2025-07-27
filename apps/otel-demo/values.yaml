@@ -3,13 +3,13 @@ frontend:
     enabled: true
     className: nginx
     hosts:
-      - host: otel-demo.local
+      - host: demo.local
         paths:
           - path: /frontend
             pathType: Prefix
     tls:
       - hosts:
-          - otel-demo.local
+          - demo.local
         secretName: otel-demo-tls
 
 cartservice:
@@ -17,7 +17,7 @@ cartservice:
     enabled: true
     className: nginx
     hosts:
-      - host: otel-demo.local
+      - host: demo.local
         paths:
           - path: /cart
             pathType: Prefix
@@ -27,7 +27,7 @@ checkoutservice:
     enabled: true
     className: nginx
     hosts:
-      - host: otel-demo.local
+      - host: demo.local
         paths:
           - path: /checkout
             pathType: Prefix
@@ -39,7 +39,7 @@ productcatalogservice:
     enabled: true
     className: nginx
     hosts:
-      - host: otel-demo.local
+      - host: demo.local
         paths:
           - path: /product
             pathType: Prefix
