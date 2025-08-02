@@ -39,7 +39,7 @@ otel-observability-gitops/
 │   │   ├── app.yaml
 │   │   └── values.yaml
 │   └── tls/
-│       └── app.yaml       # Optional cert-manager install
+│       └── app.yaml       
 ├── values/
 │   └── nginx-values.yaml
 ├── kind-cluster.yaml
